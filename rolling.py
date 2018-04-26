@@ -38,8 +38,9 @@ def auto_roll():
 
     time.sleep(2)
     browser.close()
+    
+    sched = BlockingScheduler()
+    sched.add_job(auto_roll, 'interval', hours=1)
+    sched.start()
 
 auto_roll()
-sched = BlockingScheduler()
-sched.add_job(auto_roll, 'interval', hours=1)
-sched.start()
