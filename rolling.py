@@ -30,17 +30,19 @@ def auto_roll():
     browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(3)
     try:
-        browser.find_element_by_id("free_play_form_button").click()
-        print("Clicked!")
-    except:
-        browser.find_element_by_id("time_remaining")
-        print("Need to wait.")
+		browser.find_element_by_id("play_without_captchas_button").click()
 
-    time.sleep(2)
-    browser.close()
-    
-    sched = BlockingScheduler()
-    sched.add_job(auto_roll, 'interval', hours=1)
-    sched.start()
+		browser.find_element_by_id("free_play_form_button").click()
+		print("Готово!")
+	except:
+		browser.find_element_by_id("time_remaining")
+		print("Подожди еще!")
+
+	time.sleep(2)
+	browser.close()
+	
+	sched = BlockingScheduler()
+	sched.add_job(auto_roll, 'interval', hours=1)
+	sched.start()
 
 auto_roll()
