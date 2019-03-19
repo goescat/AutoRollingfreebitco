@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 def auto_roll():
 
-    browser = webdriver.Chrome("/home/goescat/src/chromedriver") # Your webdriver path
+    browser = webdriver.Chrome("Your Webdriver Path") # Your webdriver path
     browser.get("https://freebitco.in/")
 
     #wait page and alert loading
