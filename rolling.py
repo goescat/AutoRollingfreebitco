@@ -7,22 +7,27 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-browser = webdriver.Chrome("/home/goescat/src/chromedriver") # Your webdriver path
-browser.get("https://freebitco.in/")
-
 def auto_roll():
 
+    browser = webdriver.Chrome("/home/goescat/src/chromedriver") # Your webdriver path
+    browser.get("https://freebitco.in/")
+
     #wait page and alert loading
-    wait_allow_alert_loading()
+    wait = WebDriverWait(browser, 10)
+    element = wait.until(EC.element_to_be_clickable((By.XPATH,"(//div[@class='allow_button pushpad_allow_button'])[1]")))
     # Try to close allow alert
-    close_allow_alert()
+    try:
+        allow_btn = "(//div[@class='allow_button pushpad_allow_button'])[1]"
+        browser.find_element_by_xpath(allow_btn).click()
+    except:
+        pass
 
     browser.find_element_by_class_name("login_menu_button").click()
 
     elem = browser.find_element_by_id("login_form_btc_address")
     elem.send_keys("Your Mail") # Your email or btc address
     elem = browser.find_element_by_id("login_form_password")
-    elem.send_keys("Your password") # Your password
+    elem.send_keys("Your Password") # Your password
 
     # Try to close banner message
     try:
@@ -34,9 +39,14 @@ def auto_roll():
     time.sleep(3) # Wait for page loading
 
     #wait page and alert loading
-    wait_allow_alert_loading()
+    wait = WebDriverWait(browser, 10)
+    element = wait.until(EC.element_to_be_clickable((By.XPATH,"(//div[@class='allow_button pushpad_allow_button'])[1]")))
     # Try to close allow alert
-    close_allow_alert()
+    try:
+        allow_btn = "(//div[@class='allow_button pushpad_allow_button'])[1]"
+        browser.find_element_by_xpath(allow_btn).click()
+    except:
+        pass
 
     # Try to close message
     try:
@@ -61,16 +71,5 @@ def auto_roll():
     sched = BlockingScheduler()
     sched.add_job(auto_roll, 'interval', hours=1)
     sched.start()
-
-def wait_allow_alert_loading():
-    wait = WebDriverWait(browser, 10)
-    element = wait.until(EC.element_to_be_clickable((By.XPATH,"(//div[@class='allow_button pushpad_allow_button'])[1]")))
-
-def close_allow_alert():
-    try:
-        allow_btn = "(//div[@class='allow_button pushpad_allow_button'])[1]"
-        browser.find_element_by_xpath(allow_btn).click()
-    except:
-        pass
 
 auto_roll()
