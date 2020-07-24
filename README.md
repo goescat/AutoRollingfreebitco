@@ -1,5 +1,7 @@
 # AutoRollingfreebitco
 
+## !Now freebitco.in have add Google reCAPTCHA, will not update this script in the future.!
+
 Automation playing freebitco.in per hours.
 
 ## Requisite
